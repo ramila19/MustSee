@@ -4,7 +4,7 @@ import './Favorites.css';
 
 class Favorites extends Component {
     state = {
-        title: 'Новый список',
+        place: 'New list',
         movies: [
             { imdbID: 'tt0068646', title: 'The Godfather', year: 1972 }
         ]
@@ -12,13 +12,17 @@ class Favorites extends Component {
     render() { 
         return (
             <div className="favorites">
-                <input value="Новый список" className="favorites__name" />
-                <ul className="favorites__list">
-                    {this.state.movies.map((item) => {
-                        return <li key={item.id}>{item.title} ({item.year})</li>;
-                    })}
+                 <input placeholder= {this.props.titleNewList} className="favorites__name" onChange = {(e) => this.props.getTitle(e)}/>
+                    <ul className="favorites__list">                
+                        {this.props.selectedListMovies.map((item) => {
+                            return ( 
+                            
+                            <li className="listItem" key={item.imdbID}><div className="favorites__item"> {item.Title} ({item.Year})<button className="but" onClick = {() => this.props.deleteFilms(item.imdbID)}>x</button></div></li>
+
+                            )
+                        })}
                 </ul>
-                <button type="button" className="favorites__save">Сохранить список</button>
+                <button type="button" className="favorites__save" onClick = {this.props.requestGeneration}>Save list</button>
             </div>
         );
     }
