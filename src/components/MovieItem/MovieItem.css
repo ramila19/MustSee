@@ -1,6 +1,6 @@
 .movie-item {
     padding: 20px;
-    background-color: #FFEEDB;
+    background-color: #e3dbff;
     display: flex;
 }
 
@@ -19,7 +19,7 @@
     border: none;
     background-color: #496DDB;
     padding: 10px 15px;
-    color: #FFEEDB;
+    color: #e3dbff;
     font-size: 14px;
     transition: all 0.2s linear;
 }

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import MovieItem from '../MovieItem/MovieItem';
 import './Movies.css';
 
-class Movies extends Component {
-   
+class Movies extends Component {  
+    
     render() {        
         return ( 
             <ul className="movies">                         

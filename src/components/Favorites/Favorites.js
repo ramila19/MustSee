@@ -9,10 +9,11 @@ class Favorites extends Component {
             { imdbID: 'tt0068646', title: 'The Godfather', year: 1972 }
         ]
     }
+
     render() { 
         return (
             <div className="favorites">
-                 <input placeholder= {this.props.titleNewList} className="favorites__name" onChange = {(e) => this.props.getTitle(e)}/>
+                <input placeholder= {this.props.titleNewList} className="favorites__name" onChange = {(e) => this.props.getTitle(e)}/>
                     <ul className="favorites__list">                
                         {this.props.selectedListMovies.map((item) => {
                             return ( 
@@ -21,8 +22,9 @@ class Favorites extends Component {
 
                             )
                         })}
-                </ul>
-                <button type="button" className="favorites__save" onClick = {this.props.requestGeneration}>Save list</button>
+                    </ul>
+                    <button type="button" className="favorites__save" onClick = {this.props.requestGeneration}>Save list</button>
+
             </div>
         );
     }
