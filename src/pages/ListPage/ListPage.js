@@ -1,27 +1,38 @@
 import React, { Component } from 'react';
 import './ListPage.css';
-
+import {renderingList, getSelectMovieList} from '../../components/Fetch';
+import { Link,} from 'react-router-dom';
 class ListPage extends Component {
-    state = {
-        movies: [
-            { title: 'The Godfather', year: 1972, imdbID: 'tt0068646' }
-        ]
-    }
-    componentDidMount() {
-        const id = this.props.match.params;
-        console.log(id);
-        // TODO: запрос к сервер на получение списка
-        // TODO: запросы к серверу по всем imdbID
-    }
+    state = {       
+        movies: null
+       }
+
+       componentDidMount() {
+        let params = this.props.match.params.id;
+            getSelectMovieList(params).then((data) => {
+                renderingList(data.movies).then(dates => this.setState({movies:dates}, console.log(dates)))
+             })
+        }
     render() { 
-        return (
-            <div className="list-page">
-                <h1 className="list-page__title">Мой список</h1>
+        let {movies} = this.state
+        return (            
+            <div className="list-page"> 
+                <Link className="anchor" to = '/'>to Home Page</Link>
+                <h1 className="list-page__title">My new list:</h1>
                 <ul>
-                    {this.state.movies.map((item) => {
+                    {movies&&movies.map((item) => {
                         return (
-                            <li key={item.imdbID}>
-                                <a href="https://www.imdb.com/title/tt0068646/" target="_blank">{item.title} ({item.year})</a>
+                            <li key={item.imdbID} className="liList">
+                                <div className="movie-item">                                    
+                                    <img className="movie-item__poster" src={item.Poster} alt={item.Title} />
+                                    <div className="movie-item__info">
+                                        <a href= {`https://www.imdb.com/title/${item.imdbID}/`} target="_blank">
+                                            <h3 className="movie-item__title">{item.Title}&nbsp;({item.Year})</h3> 
+                                        </a>
+                                        <p className="plot">{item.Plot}</p>
+                                        <p className="plotMini">Year: {item.Year}, DVD: {item.DVD}</p>                                        
+                                    </div>                                   
+                                </div>
                             </li>
                         );
                     })}
@@ -30,5 +41,4 @@ class ListPage extends Component {
         );
     }
 }
- 
 export default ListPage;

@@ -17,3 +17,7 @@
 .main-page__favorites {
     width: 35%;   
 }
+.divSaveList {
+    display: flex;
+    flex-direction: column;
+}
